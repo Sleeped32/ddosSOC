@@ -66,7 +66,7 @@ def AttackProx(req):
     s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
     s.connect((str(host), int(80)))
     s.settimeout(5)
-    print(s.proxy, s.timeout)
+    # print(s.proxy, s.timeout)
     while True:
         try:
             try:

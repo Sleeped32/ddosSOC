@@ -42,7 +42,7 @@ def AttackSOC(req):
     s = socks.socksocket()
     s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
     s.connect((str(host), int(80)))
-    print(s.proxy)
+    #print(s.proxy)
     while True:
         try:
             try:

